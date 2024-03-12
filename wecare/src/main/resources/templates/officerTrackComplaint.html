@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/addingStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/viewModal.css}">
+	<link rel="stylesheet" th:href="@{/css/trackComplaints.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/script.js}"></script>
+	<title>Complaint Details</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("button:contains('Respond')").click(function() {
+				$("#exampleModalCenter").modal("show");
+			});
+		});
+	</script>
+	<style>
+	.details-container {
+		width: 80%;
+		margin-left: 150px;
+	}
+	
+	h2 {
+		font-size: 1.75rem;
+	}
+	
+	.navbar ul {
+		display: flex;
+		margin-top: 15px;
+	}
+	
+	.tableCaption {
+		margin-bottom: -159px;
+		margin-top: 110px;
+	}
+	
+	.tableCaption a {
+		margin-top: 10px;
+	}
+	</style>
+</head>
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"
+					style="color: #000;"></i> &nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li>
+						<div class="user-icon">
+							<span>[[${officerName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/officer/view-profile}">View Profile</a> <a
+									th:href="@{/wecare/officer/change-password}">Change
+									Password</a> <a th:href="@{/logout}" onclick="confirmLogout(event)">Logout
+									<i class="fa-solid fa-right-from-bracket"
+									style="color: #e40707; margin-left: 5px; font-size: 20px;">
+								</i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<div id="popup" class="popup">
+		<p th:if="${successMessage}" th:text="${successMessage}"></p>
+	</div>
+
+	<div class="tableCaption">
+		<a th:href="@{/wecare/officer/track-complaints}"><button
+				type="button">
+				<i class="fa-solid fa-circle-arrow-left icon"></i>
+			</button></a>
+		<button type="button" class="pages">Respond</button>
+	</div>
+
+	<div class="details-container">
+		<div class="details">
+			<h2>Complaint Details</h2>
+			<p>
+				<b>Complaint ID:</b>&nbsp; <span th:text="${complaint.complId}"></span>
+			</p>
+			<p>
+				<b>Address:</b>&nbsp; <span th:text="${complaint.address}"></span>
+			</p>
+			<p>
+				<b>Comments:</b>&nbsp; <span th:text="${complaint.comments}"></span>
+			</p>
+		</div>
+
+		<div class="details">
+			<h2>Jurisdiction Details</h2>
+			<p>
+				<b>Area:</b>&nbsp; <span th:if="${complaint.juryComplaint != null}"
+					th:text="${complaint.juryComplaint.area}"></span>
+			</p>
+			<p>
+				<b>Ward:</b>&nbsp; <span th:if="${complaint.juryComplaint != null}"
+					th:text="${complaint.juryComplaint.ward}"></span>
+			</p>
+			<p>
+				<b>Layout:</b>&nbsp; <span
+					th:if="${complaint.juryComplaint != null}"
+					th:text="${complaint.juryComplaint.layout}"></span>
+			</p>
+		</div>
+
+		<div class="details">
+			<h2>User Details</h2>
+			<p>
+				<b>Name:</b>&nbsp; <span th:if="${complaint.user != null}"
+					th:text="${complaint.user.firstName}"></span>
+			</p>
+			<p>
+				<b>Email:</b>&nbsp; <span th:if="${complaint.user != null}"
+					th:text="${complaint.user.email}"></span>
+			</p>
+		</div>
+	</div>
+
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Response</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="post" th:action="@{/wecare/officer/track-complaints/view-details/save-response/{complaintId}(complaintId=${complaint.complId})}">
+						<input type="hidden" th:name="complaintId" th:value="${complaint.complId}" />
+						<textarea id="response" name="response" placeholder="Type your Response here . . ." maxlength="2000" rows="5" cols="10" required>[[${complaint.response}]]</textarea>
+						<button type="submit" class="pages pages1">Save</button>
+						<button type="button" data-dismiss="modal" class="pages pages2">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/addingStyle.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<title>Edit Profile</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+					&nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare/officer/track-complaints}">Track Complaints</a></li>
+					<li>&nbsp; </li>
+					<li>
+						<div class="user-icon">
+							<span>[[${officerName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/officer/change-password}">Change Password</a>
+								<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout <i
+										class="fa-solid fa-right-from-bracket"
+										style="color: #e40707; margin-left: 5px; font-size:20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div id="popup" class="popup" th:if="${errorMessage}">
+		<p th:text="${errorMessage}"></p>
+	</div>
+
+	<div class="tableCaption">
+		<p>EDIT PROFILE</p>
+	</div>
+
+	<form th:action="@{/wecare/officer/update-profile}" method="post" th:object="${officer}">
+
+		<input type="hidden" th:field="*{officerId}">
+		<label>Officer Name <span class="required-text">*</span></label>
+		<input type="text" class="input-field" id="name" name="name" pattern="^[a-zA-Z\s]+$" maxlength="40"
+			placeholder="Enter your Name" th:field="*{officerName}"
+			oninvalid="setCustomValidity('Name should be less than 40 characters and contain only letters')"
+			onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+		<label>Address <span class="required-text">*</span>* </label>
+		<input type="text" id="address" name="address" th:field="*{address}" pattern="^[a-zA-Z0-9#\s]+$" maxlength="50"
+			placeholder="Enter Officer's Address"
+			oninvalid="setCustomValidity('Address should be less than 50 characters and contain only letters')"
+			onchange="try{setCustomValidity('')}catch(e){}" autofocus />
+
+		<label>Email<span class="required-text">*</span> :
+		</label> <input type="email" id="email" name="email" th:field="*{email}"
+			pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter Officer's email" required/>
+
+		<label>Phone<span class="required-text">*</span> :
+		</label> <input type="tel" class="input-field" id="phone" name="phone" th:field="*{phone}" pattern="[0-9]{10}"
+			maxlength="10" title="Phone Number Should contain only Digits" placeholder="Enter Officer's Phone Number *"
+			required/>
+
+		<table>
+			<caption></caption>
+			<tr>
+				<th>
+				<td>
+					<button type="submit" class="pages pages-1">Save</button> <a
+						th:href="@{/wecare/officer/view-profile}"><button type="button"
+							class="pages pages-2">Cancel</button></a>
+				</td>
+				</th>
+			</tr>
+		</table>
+	</form>
+	<br>
+	<br>
+
+</body>
+
+</html>

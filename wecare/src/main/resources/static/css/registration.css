@@ -1,0 +1,243 @@
+body {
+	background: url('../css/abstract2.jpg') center repeat-x !important;
+}
+
+.hero {
+	width: 100vw;
+	height: 115vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0.7;
+}
+
+.form-box {
+	background-color: #fff;
+	padding: 25px 40px;
+	border-radius: 15px;
+	margin-bottom: 60px;
+	position: relative;
+	z-index: 2;
+}
+
+.input-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	position: relative;
+	z-index: 3;
+}
+
+.message {
+	margin-left: 25px;
+	margin-bottom: 15px;
+}
+
+.input-field {
+	padding: 10px;
+	margin-top: 2px;
+	border: 1px solid #100e0e;
+	border-radius: 1px;
+	font-size: 16px;
+}
+
+label {
+	margin-bottom: -10px;
+	font-size: 15px;
+	font-weight: bold;
+	color: #4caf50;
+	margin-left: 5px;
+}
+
+.input-field::placeholder {
+	font-size: 14px;
+	color: black;
+}
+
+.input-field:focus {
+	border: none;
+}
+
+.required-text {
+	font-style: italic;
+	font-size: 16px;
+	color: red;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-between;
+}
+
+
+.submit-btn {
+	padding: 10px 20px;
+	margin-top: 10px;
+	border-radius: 3px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	border: none;
+}
+
+.submit-btn:active {
+	background-color: greenyellow;
+	transform: scale(0.95);
+}
+
+.submit-btn[type="button"] {
+	background-color: #ddd;
+	color: #333;
+}
+
+.submit-btn:hover {
+	color: white;
+	background-color: #4caf50;
+}
+
+header {
+	background-color: rgba(0, 0, 0, 0.2);
+	/* Black with 0.3 opacity */
+	position: relative;
+	z-index: 1;
+}
+
+nav {
+	position: relative;
+	z-index: 12;
+}
+
+.input-group h2 {
+	font-family: 'Georgia', Times, serif;
+	text-align: center;
+	font-weight: 600;
+	margin: auto;
+	margin-bottom: 10px;
+	color: black;
+	font-size: 27px;
+}
+
+#navbar nav li a i {
+	color: #4caf50;
+	background-color: rgba(16, 14, 14, 0.2);
+	padding: 6px 6px;
+	font-style: bold;
+	border: none;
+	border-radius: 100%;
+}
+
+p {
+	font-family: 'Georgia', Times, serif;
+	font-size: 17px;
+	margin-top: 10px;
+}
+
+.form-box p a {
+	color: black;
+	font-weight: 550;
+	text-decoration: underline;
+}
+
+.form-box p a:hover {
+	cursor: pointer;
+	color: #4caf50;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 250px;
+	backdrop-filter: blur(5px);
+	border-radius: 20px;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+	filter: none;
+}
+
+.modal-content {
+	background-color: #fff;
+	font-family: 'Times New Roman', Times, serif;
+	padding: 15px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+	color: black;
+	font-weight: bold;
+	background-color: #4caf50;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+h3 {
+	color: black;
+	margin-bottom: 20px;
+}
+
+#otp {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+button {
+	padding: 10px;
+	cursor: pointer;
+}
+
+#countdown {
+	margin-top: 10px;
+	font-size: 14px;
+	color: #888;
+}
+
+#validateButton {
+background-color: rgb(255, 255, 255);
+
+}
+
+#validateButton.green {
+	background-color: rgb(128, 255, 0);
+
+}
+
+.popup {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 15%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	z-index: 4;
+}
+
+.popup1 {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 15%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: red;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	z-index: 4;
+}

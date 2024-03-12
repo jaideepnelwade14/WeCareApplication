@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{../css/weCareHome.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js"
+		crossorigin="anonymous"></script>
+	<title>WeCare Home</title>
+</head>
+<body>
+	
+	<nav>
+        <div>
+            <h1><a href="#home"><i style="font-size: 25px;" class="fa-solid fa-handshake"></i>&nbsp;&nbsp;WeCare</a>
+            </h1>
+        </div>
+        <div class="nav-links">
+            <a href="#about"><i class="fa-solid fa-book fa-lg"></i>&nbsp;About</a>
+            <a href="#footer"><i class="fa-solid fa-address-book fa-lg"></i>&nbsp;Contact</a>
+            <a id="login" th:href="@{/wecare/login}">Login/Register <i class="fa-solid fa-right-to-bracket fa-lg"
+                    style="color: #04d242;"></i></a>
+        </div>
+    </nav>
+
+    <section id="home" class="home-section">
+        <div class="banner">
+            <h1>Welcome to WeCare</h1>
+            <p>At WeCare, we strive to help Bengaluru live up to its fame of being a great city to live in — soon to become a Smart City. We focus on working quicker and smarter to secure a transformative future for all of us.</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+
+    </section>
+
+
+    <section id="about" class="about-section">
+        <div class="banner">
+            <div>
+                <h2>About Us</h2>
+                <p>WeCare is a user-friendly website designed to empower citizens by providing a platform to voice their
+                    complaints and concerns regarding city streets. The primary focus is on facilitating a seamless
+                    process
+                    for users to raise issues related to roads, track the progress of their complaints, and, when
+                    necessary,
+                    escalate matters. External users, representing the common citizens, are encouraged to register on
+                    the
+                    platform to actively participate in improving their local infrastructure. Meanwhile, internal users,
+                    comprising city officers responsible for addressing these concerns, can be created and managed
+                    through
+                    the Officers Admin page. The website ensures a smooth user experience with a prominently placed
+                    logout
+                    button at the top right corner, allowing individuals to effortlessly navigate back to the landing
+                    page
+                    and login screen when needed.</p>
+            </div>
+            <div class="summary">
+                <div>
+                    <h1>Users Registered</h1>
+                    <h2 style="color: white !important">[[${usersCount}]]</h2>
+                </div>
+                <div>
+                    <h1>Complaints Raised</h1>
+                    <h2 style="color: white !important">[[${complaintsCount}]]</h2>
+                </div>
+                <div>
+                    <h1>Complaints Closed</h1>
+                    <h2 style="color: white !important">[[${closedComplaintsCount}]]</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="contact-details">
+            <div>
+                <h2><i style="font-size: 30px;" class="fa-solid fa-handshake">&nbsp;</i>WeCare</h2>
+                <p style="font-size: 13px;">Grievance redressal portal</p>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <p><i class="fa-solid fa-envelope"></i> wecarehelpline2024@gmail.com<br>
+                    <i class="fa-solid fa-phone"></i> +91 9353761490
+                </p>
+            </div>
+        </div>
+        <hr />
+        <h3>Copyright &copy; WeCare. All rights reserved.</h3>
+    </footer>
+</body>
+</html>

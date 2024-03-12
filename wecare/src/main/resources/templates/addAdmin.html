@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/addingStyle.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/script.js}"></script>
+	<title>Add Admin</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+					&nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare/admin/track-complaints}">Track Complaints</a></li>
+					<li class="buttons"><a th:href="@{/wecare/admin/jurisdictions}">Jurisdictions</a></li>
+					<li class="buttons"><a th:href="@{/wecare/admin/officers}">Officers</a></li>
+					<li>&nbsp;</li>
+					<li>
+						<div class="user-icon">
+							<span>[[${adminName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/admin/officers/add}">Add Officer</a>
+								<a th:href="@{/wecare/admin/jurisdictions/add}">Add Jurisdiction</a>
+								<a th:href="@{/wecare/admin/change-password}">Change Password</a> 
+								<a th:href="@{/logout}"
+									onclick="confirmLogout(event)">Logout <i
+									class="fa-solid fa-right-from-bracket"
+									style="color: #e40707; margin-left: 5px; font-size: 20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div id="popup" class="popup">
+		<p th:if="${message}" th:text="${message}"></p>
+	</div>
+
+	<div class="tableCaption">
+		<p>ADD ADMIN</p>
+	</div>
+
+	<div>
+		<form th:action="@{/wecare/admin/add-admin}" th:object="${admin}" method="post">
+
+			<label>Name<span class="required-text">*</span> :</label>
+			<input type="text" class="input-field" id="userName" name="userName" pattern="[A-Za-z0-9\s]{3,}" th:field="*{adminName}"
+					maxlength="15" placeholder="Enter your Username"
+					oninvalid="setCustomValidity('Name should be more than 3 characters and contain only letters')"
+					onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+			<label>Email<span class="required-text">*</span> :</label>
+			<input type="email" class="input-field" id="email" name="email" th:field="*{email}"
+					pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your Email"
+					oninput="toggleVerifyButton()" required />
+
+			<label>Phone<span class="required-text">*</span> :</label>
+			<input type="tel" class="input-field" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" th:field="*{phone}"
+					title="Phone Number Should contain only Digits" placeholder="Enter your Phone Number" required>
+
+			<table>
+				<caption></caption>
+				<tr>
+					<th>
+						<td>
+							<button type="submit" class="pages pages-1">Save</button> 
+							<a th:href="@{/wecare/admin/view-profile}">
+								<button type="button" class="pages pages-2">Cancel</button>
+							</a>
+						</td>
+					</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>

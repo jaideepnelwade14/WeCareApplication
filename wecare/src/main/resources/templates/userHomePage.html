@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/tableUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/userHomePage.css}">
+	<link rel="stylesheet" th:href="@{/css/viewModal.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<title>User Home</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("td button.view-button").click(function () {
+				var responseText = $(this).attr("data-response");
+				showResponseModal(responseText);
+			});
+
+			function showResponseModal(responseText) {
+				if (responseText) {
+					$("#responsePlaceholder").text(responseText);
+				} else {
+					$("#responsePlaceholder").text("No response yet.");
+				}
+				$("#exampleModalCenter").modal("show");
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake" style="color: #000;"></i>
+				</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li>
+						<div class="user-icon">
+							<span>[[${userName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/user/view-profile}">View Profile</a>
+								<a th:href="@{/wecare/user/change-password}">Change Password</a>
+								<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout <i
+										class="fa-solid fa-right-from-bracket"
+										style="color: #e40707; margin-left: 5px; font-size:20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div id="popup" class="popup">
+		<p th:if="${successMessage}" th:text="${successMessage}"></p>
+	</div>
+
+	<div class="tableCaption">
+		<p>TRACK COMPLAINTS</p>
+		<a th:href="@{/wecare/user/create-complaint}"><button type="button" class="pages">Create Complaint</button></a>
+	</div>
+
+	<table>
+		<caption></caption>
+		<tr>
+			<th>Sl No.</th>
+			<th>Registered Date</th>
+			<th>Type of Issue</th>
+			<th>Officer Contact</th>
+			<th>Complaint Details</th>
+			<th>Response</th>
+			<th>Status</th>
+		</tr>
+		<th:block th:if="${not #lists.isEmpty(complaints)}"></th:block>
+		<tr th:each="compl, iterStat : ${complaints}">
+			<td th:text="${iterStat.count}"></td>
+			<td th:text="${#temporals.format(compl.createdDate,'yyyy-MM-dd &nbsp;&nbsp; hh:mm')}"></td>
+			<td th:text="${compl.issue}"></td>
+			<td th:if="${compl.officer != null}" th:text="${compl.officer.phone}"></td>
+			<td style="text-align: center;">
+					<a th:href="@{/wecare/user/track-complaints/view-details(complaintId=${compl.complId})}">
+						<button type="button" class="pages">View</button>
+					</a>
+			</td>
+			<td style="text-align: center;">
+				<button type="button" class="view-button pages" th:attr="data-response=${compl.response}"
+					onclick="showResponseModal(this)">View</button>
+			</td>
+			<td th:text="${compl.status}"></td>
+		</tr>
+	</table>
+
+
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Response</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p><span id="responsePlaceholder"></span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:if="${#lists.isEmpty(complaints)}">
+		<p th:text="${noComplaintsMessage}" class="complaintMessage"></p>
+	</th:block>
+	<br/>
+	<br/>
+	
+</body>
+</html>

@@ -1,0 +1,44 @@
+#exampleModalCenter {
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+	max-width: 400px;
+}
+
+.modal-content {
+	border-radius: 8px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+	background-color: #4caf50;
+	color: white;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+}
+
+.modal-title {
+	font-weight: bold;
+}
+
+.modal-body {
+	padding: 15px 15px;
+}
+
+.close {
+	padding: 17px 19px !important;
+	color: white;
+	opacity: 0.8;
+}
+
+.close:hover, .close:focus {
+	color: white;
+	border: none !important;
+	opacity: 1;
+}
+
+#responsePlaceholder {
+	font-size: 16px;
+	color: #333;
+}

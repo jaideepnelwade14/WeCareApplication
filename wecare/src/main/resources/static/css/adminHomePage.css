@@ -1,0 +1,103 @@
+body {
+	background: url('../css/abstract2.jpg') center repeat-x !important;
+}
+
+table {
+	width: 80%;
+}
+
+.tableCaption p {
+	padding: 5px 5px;
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: black;
+	font-size: 18px;
+	font-weight: 600;
+	margin-left: 160px !important;
+}
+
+.complaintMessage {
+	text-align: center;
+	font-weight: bold;
+}
+
+.navbar ul {
+	display: flex;
+	margin-top: 15px;
+}
+
+.pages {
+	font-size: 14.5px;
+	padding: 4px;
+	cursor: pointer;
+	border: 1px solid black;
+}
+
+.pages:hover {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+}
+
+.popup {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 24%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tick {
+	margin-left: 4px;
+	padding: 2px 4px;
+	border: 1px solid black;
+	color: black;
+}
+
+.tick:hover {
+	background-color: #4caf50;
+	border: none;
+	color: white;
+}
+
+.tick i {
+	font-weight: bold;
+	font-size: 16.5px;
+}
+
+.status-filter {
+   float: right;
+   display: inline-block;
+   margin-top: -44px;
+   margin-right: 160px;
+}
+
+.status-filter label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#statusFilter{
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#statusFilter:hover {
+  border-color: #555;
+}
+
+.status-filter select:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/addingStyle.css}">
+	<link rel="stylesheet" th:href="@{/css/trackComplaints.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/script.js}"></script>
+	<title>Complaint Details</title>
+	<style>
+		.details-container {
+			flex-wrap: wrap;
+		}
+		
+		.details {
+			max-width: 33%;	
+			flex-basis: 45%;
+			margin: 4px;
+		}
+		
+		.tableCaption {
+			margin-left: -975px;
+			margin-bottom: -140px;
+			margin-top: 50px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<body>
+		<header class="homeheader">
+			<div id="navbar" class="navbar top">
+				<h1 class="logo">
+					<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+						&nbsp;</span>WeCare
+				</h1>
+				<nav>
+					<ul>
+						<li class="buttons"><a th:href="@{/wecare/admin/jurisdictions}">Jurisdictions</a></li>
+						<li class="buttons"><a th:href="@{/wecare/admin/officers}">Officers</a></li>
+						<li>&nbsp;</li>
+						<li>
+							<div class="user-icon">
+								<span>[[${adminName}]]</span> &nbsp;
+								<button class="user-icon-button">
+									<i class="fa-solid fa-user-tie"></i>
+								</button>
+								<div class="dropdown-content">
+									<a th:href="@{/wecare/admin/officers/add}">Add Officer</a>
+									<a th:href="@{/wecare/admin/jurisdictions/add}">Add Jurisdiction</a>
+									<a th:href="@{/wecare/admin/view-profile}">View Profile</a>
+									<a th:href="@{/wecare/admin/change-password}">Change Password</a>
+									<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout <i
+											class="fa-solid fa-right-from-bracket"
+											style="color: #e40707; margin-left: 5px; font-size: 20px;"></i>
+									</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		
+		<div class="tableCaption">
+			<a th:href="@{/wecare/admin/track-complaints}"><button type="button"><i class="fa-solid fa-circle-arrow-left icon"></i></button></a>
+		</div>
+		
+		<div class="details-container">
+			<div class="details">
+				<h2>Complaint Details</h2>
+				<p><b>Complaint ID:</b>&nbsp; <span th:text="${complaint.complId}"></span></p>
+				<p><b>Address:</b>&nbsp; <span th:text="${complaint.address}"></span></p>
+				<p><b>Landmark:</b>&nbsp; <span th:text="${complaint.landmark}"></span></p>
+				<p><b>Comments:</b>&nbsp; <span th:text="${complaint.comments}"></span></p>
+			</div>
+
+			<div class="details">
+				<h2>Jurisdiction Details</h2>
+				<p><b>Area:</b>&nbsp; <span th:if="${complaint.juryComplaint != null}"
+						th:text="${complaint.juryComplaint.area}"></span></p>
+				<p><b>Ward:</b>&nbsp; <span th:if="${complaint.juryComplaint != null}"
+						th:text="${complaint.juryComplaint.ward}"></span></p>
+				<p><b>Layout:</b>&nbsp; <span th:if="${complaint.juryComplaint != null}"
+						th:text="${complaint.juryComplaint.layout}"></span>
+				</p>
+			</div>
+
+			<div class="details">
+				<h2>Officer Details</h2>
+				<p><b>Name:</b>&nbsp; <span th:if="${complaint.officer != null}"
+						th:text="${complaint.officer.officerName}"></span></p>
+				<p><b>Email:</b>&nbsp; <span th:if="${complaint.officer != null}"
+						th:text="${complaint.officer.email}"></span></p>
+			</div>
+
+			<div class="details">
+				<h2>User Details</h2>
+				<p><b>Name:</b>&nbsp; <span th:if="${complaint.user != null}" th:text="${complaint.user.firstName}"></span></p>
+				<p><b>Email:</b>&nbsp; <span th:if="${complaint.user != null}" th:text="${complaint.user.email}"></span></p>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,114 @@
+.container {
+	height: 61%;
+	width: 54%;
+	margin: 6.5% 10% 10% 22%;
+}
+
+.personal-details-body {
+	display: flex;
+	justify-content: space-between;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.profile-photo i {
+	font-size: 60px;
+	background: #4caf50;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 100px;
+	margin-left: 50px;
+}
+
+.personal-details {
+	display: flex;
+	flex-direction: column;
+	margin-right: 50%;
+}
+
+.personal-details-row-1 {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+}
+
+.personal-details-row-1 div {
+	text-align: center;
+	margin: 20px;
+	margin-bottom: 10px;
+}
+
+p {
+	font-weight: bold;
+	color: #4caf50;
+}
+
+.count {
+	background-color: #4caf50;
+	color: black;
+	height: 27px;
+	width: 27px;
+}
+
+.buttons{
+	margin-top: -215px;
+	float: right;
+	margin-right: 367px;
+}
+
+.buttons .pages {
+	padding: 10px 10px;
+	font-size: 16px;
+	font-style: italic;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+}
+
+.buttons .pages:hover {
+	color: white;
+	background-color: #4caf50;
+}
+
+.buttons .pages i {
+	font-size: 18px;
+}
+
+.tableCaption{
+	display: flex;
+	justify-content: center;
+	margin-bottom: -95px;
+}
+
+.tableCaption p {
+	font-family: 'Open Sans', sans-serif !important;
+	font-style: inherit;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: black;
+	font-size: 18px;
+	font-weight: 600;
+	padding: 5px 5px;
+}
+
+.popup {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 16%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup p {
+	color: white;
+}

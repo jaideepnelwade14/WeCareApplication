@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/viewingProfileStyle.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<title>Create Complaint</title>
+</head>
+<style>
+	.profile-photo i:hover{
+		color: rgba(255, 255, 255, 0.9);
+	}
+</style>
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+					&nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare/user/track-complaints}">Track Complaints</a></li>
+					<li>&nbsp; </li>
+					<li>
+						<div class="user-icon">
+							<span>[[${userName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout <i
+									class="fa-solid fa-right-from-bracket"
+									style="color: #e40707; margin-left: 5px; font-size:20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<div id="popup" class="popup">
+		<p th:if="${successMessage}" th:text="${successMessage}"></p>
+	</div>
+	
+	<div class="tableCaption">
+		<p>VIEW PROFILE</p>
+	</div>
+	
+	<div class="container">
+		<div class="personal-details-body">
+			<div class="profile-photo">
+				<a th:href="@{/wecare/user/edit-profile(id=${userDetails.userId})}"><i class="fa-solid fa-user-pen"></i></a>
+			</div>
+			<div class="Personal-details">
+				<div class="personal-details-row-1">
+					<div>
+						<h3>First Name</h3>
+						<p th:text="${userDetails.firstName}"></p>
+					</div>
+					<div>
+						<h3>Last Name</h3>
+						<p th:text="${userDetails.lastName}"></p>
+					</div>
+					<div>
+						<h3>Email</h3>
+						<p th:text="${userDetails.email}"></p>
+					</div>
+				</div>
+				<div class="Personal-details">
+					<div class="personal-details-row-1">
+						<div>
+							<h3>Phone Number</h3>
+							<p th:text="${userDetails.phone}"></p>
+						</div>
+						<div>
+							<h3>Registered Date</h3>
+							<p th:text="${#temporals.format(userDetails.registeredDate,'yyyy-MM-dd')}"></p>
+						</div>
+						<div>
+    						<h3>Last Modified Date</h3>
+    						<p th:text="${userDetails.modifiedDate != null ? #temporals.format(userDetails.modifiedDate, 'yyyy-MM-dd') : '------'}"></p>
+						</div>
+					</div>
+					<div class="Personal-details">
+						<div class="personal-details-row-1">
+							<div>
+								<h3>Complaints Raised</h3>
+								<p th:text="${complaintsCount}" class="count"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="buttons">
+		<a th:href="@{/wecare/user/change-password}">
+			<button type="button"class="pages"><i class="fa-solid fa-key"></i>&nbsp;Change Password</button>
+		</a>
+	</div>
+	
+</body>
+
+</html>

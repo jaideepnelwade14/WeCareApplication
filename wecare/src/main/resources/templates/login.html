@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{../css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{../css/login.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script th:src="@{/js/back.js}"></script>
+	<script th:src="@{/js/script.js}"></script>
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+<title>Login Form</title>
+</head>
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="logo-color"><i class="fa-solid fa-handshake"></i>
+				</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a class="home" th:href="@{/wecare}"><i
+							class="fa-solid fa-house"></i>&nbsp;&nbsp;Home</a></li>
+					<li class="buttons"><a class="about"
+						th:href="@{/wecare#about}"><i class="fa-solid fa-book fa-lg"></i>&nbsp;&nbsp;About</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<div th:if="${param.error}" id="popup1" class="popup1">
+		<p>Invalid Credentials !</p>
+	</div>
+	
+	<div id="popup" class="popup">
+		<p th:if="${successMessage}" th:text="${successMessage}"></p>
+	</div>
+
+	<div class="hero">
+		<div class="form-box">
+			<form th:action="@{/wecare/login}" method="post" class="input-group">
+				<h2>LOGIN</h2>
+				<br>
+
+				<input type="email" class="input-field" id="username"
+					name="username" placeholder="Enter your email" required autofocus>
+				<input type="password" class="input-field" id="password"
+					name="password" placeholder="Enter your password" required
+					autofocus><br>
+				<div class="buttons">
+					<button type="submit" class="submit-btn pages-1">Login</button>
+					<button type="reset" class="submit-btn pages-2">Reset</button>
+				</div>
+				<br>
+				<p>
+					Not Registered? <a th:href="@{/wecare/registration}">Click here to register</a>
+				</p>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

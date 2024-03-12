@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/addingStyle.css}">
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<script th:src="@{/js/script.js}"></script>
+	<title>Add Jurisdiction</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+					&nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare/admin/track-complaints}">Track
+							Complaints</a></li>
+					<li class="buttons"><a th:href="@{/wecare/admin/officers}">Officers</a></li>
+					<li>&nbsp;</li>
+					<li>
+						<div class="user-icon">
+							<span>[[${adminName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/admin/officers/add}">Add Officer</a>
+								<a th:href="@{/wecare/admin/view-profile}">View Profile</a>  
+								<a th:href="@{/wecare/admin/change-password}">Change Password</a> 
+								<a th:href="@{/logout}"
+									onclick="confirmLogout(event)">Logout <i
+									class="fa-solid fa-right-from-bracket"
+									style="color: #e40707; margin-left: 5px; font-size: 20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div id="popup" class="popup">
+		<p th:if="${message}" th:text="${message}"></p>
+	</div>
+
+	<div class="tableCaption">
+		<p>ADD JURISDICTION</p>
+	</div>
+
+	<div>
+		<form th:action="@{/wecare/admin/jurisdictions/add}" th:object="${newJurisdiction}"
+			method="post">
+
+			<label>Area<span class="required-text">*</span> :
+			</label> <input type="text" id="area" name="area" th:field="*{area}"
+				maxlength="40" pattern="^[a-zA-Z\s]+$" placeholder="Enter Area"
+				oninvalid="setCustomValidity('Area should be less than 40 characters and contain only letters')"
+				onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+			<label>Ward<span class="required-text">*</span> :
+			</label> <input type="text" id="wars" name="ward" th:field="*{ward}"
+				maxlength="40" pattern="[A-Za-z0-9\s]+(-[0-9\s]+$)?"
+				placeholder="Enter Ward"
+				oninvalid="setCustomValidity('Ward should be less than 40 characters and contain only letters and numbers with one hyphen')"
+				onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+			<label>Layout<span class="required-text">*</span> :
+			</label> <input type="text" id="layout" name="layout" th:field="*{layout}"
+				maxlength="40" pattern="[A-Za-z\s]+(-[A-Za-z\s]+$)?"
+				placeholder="Enter Layout"
+				oninvalid="setCustomValidity('Layout should be less than 40 characters and contain only letters with one hyphen')"
+				onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+			<table>
+				<caption></caption>
+				<tr>
+					<th>
+						<td>
+							<button type="submit" class="pages pages-1" id="saveButton">Save</button> 
+							<a th:href="@{/wecare/admin/jurisdictions}">
+								<button type="button" class="pages pages-2">Cancel</button>
+							</a>
+						</td>
+					</th>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

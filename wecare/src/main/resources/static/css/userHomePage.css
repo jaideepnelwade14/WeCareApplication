@@ -1,0 +1,70 @@
+body {
+	background: url('../css/abstract2.jpg') center repeat-x !important;
+}
+
+table {
+	width: 80%;
+}
+
+.tableCaption {
+	margin-left: 160px;
+}
+
+.tableCaption p {
+	padding: 5px 5px;
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: black;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.tableCaption .pages {
+	padding: 10px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	float: right;
+	margin-right: 160px;
+	margin-top: 10px;
+	cursor: pointer;
+	border: none;
+}
+
+.tableCaption .pages:hover {
+	color: white;
+	background-color: #4caf50;
+}
+
+.popup {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 20%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.complaintMessage {
+	text-align: center;
+	font-weight: bold;
+}
+
+.pages {
+	font-size: 14.5px;
+	padding: 4px;
+	cursor: pointer;
+	border: 1px solid black;
+}
+
+.pages:hover {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+}

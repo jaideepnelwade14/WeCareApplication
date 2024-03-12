@@ -1,0 +1,111 @@
+body {
+	background: url('../css/abstract2.jpg') center repeat-x !important;
+}
+
+table {
+	width: 50%;
+}
+
+td:nth-child(5) {
+	display: flex;
+	flex-direction: row;
+	gap: 30px;
+	justify-content: center;
+}
+
+.tableCaption {
+	margin-left: 390px;
+}
+
+.tableCaption p {
+	padding: 5px 5px;
+	display: inline-block;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: black;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.tableCaption .pages {
+	padding: 10px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	float: right;
+	margin-right: 390px;
+	margin-top: 10px;
+	cursor: pointer;
+	border: none;
+}
+
+.tableCaption .pages:hover {
+	color: white;
+	background-color: #4caf50;
+}
+
+.popup {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 32%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: #4caf50;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.complaintMessage {
+	text-align: center;
+	font-weight: bold;
+}
+
+.popup1 {
+	margin: auto;
+	font-size: 13.5px;
+	display: none;
+	position: fixed;
+	top: 32%;
+	left: 50%;
+	padding-left: 4px;
+	padding-right: 4px;
+	transform: translate(-50%, -50%);
+	background-color: red;
+	color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.search-bar {
+	text-align: center;
+	padding: 10px;
+	border-radius: 5px;
+	margin-top: -10px;
+	margin-bottom: 10px;
+}
+
+.search-bar #searchInput {
+	padding: 8px;
+	margin-top: 2px;
+	border: 2px solid #100e0e;
+	border-radius: 8px;
+	font-size: 16px;
+}
+
+label {
+	font-size: 25px;
+	padding: 5px;
+	font-weight: bold;
+	background-color: rgba(255, 255, 255, 0.8);
+	margin-left: 5px;
+	color: #4caf50;
+	border-radius: 8px;
+}
+
+#searchInput::placeholder {
+	color: #100e0e;
+	font-style: italic;
+}

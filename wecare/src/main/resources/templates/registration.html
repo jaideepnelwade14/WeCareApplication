@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{../css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{../css/registration.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<title>Registration Form</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="logo-color"><i class="fa-solid fa-handshake"></i>
+				</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare}"><i class="fa-solid fa-house"></i>&nbsp;&nbsp;Home</a>
+					</li>
+					<li class="buttons"><a th:href="@{/wecare#about}"><i
+								class="fa-solid fa-gear"></i>&nbsp;&nbsp;About</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<div th:if="${sMessage}" id="popup" class="popup">
+		<p th:text="${sMessage}"></p>
+	</div>
+
+	<div th:if="${eMessage}" id="popup1" class="popup1">
+		<p th:text="${eMessage}"></p>
+	</div>
+
+	<div class="hero">
+		<div class="form-box">
+
+			<form th:action="@{/wecare/registration}" method="post" th:object="${user}" class="input-group">
+				<h2>REGISTRATION</h2>
+
+				<label>User Name <span class="required-text">*</span></label>
+				<input type="text" class="input-field" id="userName" name="userName" pattern="[A-Za-z0-9]{3,}"
+					maxlength="15" placeholder="Enter your Username"
+					oninvalid="setCustomValidity('Name should be more than 3 characters and contain only letters')"
+					onchange="try{setCustomValidity('')}catch(e){}" required autofocus />
+
+				<label>First Name <span class="required-text">*</span></label>
+				<input type="text" class="input-field" id="firstName" name="firstName" pattern="[A-Za-z]{3,}"
+					maxlength="15" placeholder="Enter your First Name"
+					oninvalid="setCustomValidity('Name should be more than 3 characters and contain only letters')"
+					onchange="try{setCustomValidity('')}catch(e){}" required>
+
+				<label>Last Name</label>
+				<input type="text" class="input-field" id="lastName" name="lastName" pattern="[A-Za-z]{3,}"
+					maxlength="15" placeholder="Enter your Last Name"
+					oninvalid="setCustomValidity('Name should be more than 3 characters and contain only letters')"
+					onchange="try{setCustomValidity('')}catch(e){}">
+
+				<label>Password <span class="required-text">*</span></label>
+				<input type="password" class="input-field" id="password" name="password"
+					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+					title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one digit, and one special character (@$!%*?&)"
+					placeholder="Enter Password" required>
+
+				<label>Confirm Password <span class="required-text">*</span></label>
+				<input type="password" class="input-field" id="confirmPassword" name="confirmPassword"
+					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+					title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one digit, and one special character (@$!%*?&)"
+					placeholder="Re-enter password" required>
+
+				<h5 id="passwordmessage" style="color: red;"></h5>
+
+				<label>Phone No. <span class="required-text">*</span></label>
+				<input type="tel" class="input-field" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10"
+					title="Phone Number Should contain only Digits" placeholder="Enter your Phone Number" required>
+
+				<label for="email">Email <span class="required-text">*</span></label>
+				<input type="email" class="input-field" id="email" name="email"
+					pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" placeholder="Enter your Email"
+					oninput="toggleVerifyButton()" required>
+
+				<button type="button" class="verify-btn" id="verifyButton" onclick="generateOtp()">Verify</button>
+
+
+				<button type="submit" class="submit-btn" id="submitButton" disabled>Register</button>
+				<p>Already Registered?
+					<a href="/wecare/login">Click here to Login</a>
+				</p>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		function showOtpPopup() {
+			document.getElementById("otpPopup").style.display = "block";
+			countdown = 60;
+			startOtpTimer();
+		}
+
+		function hideOtpPopup() {
+			document.getElementById("otpPopup").style.display = "none";
+			clearInterval(otpTimer);
+		}
+
+		function startOtpTimer() {
+			const otpTimer = setInterval(function () {
+				if (countdown <= 0) {
+					clearInterval(otpTimer);
+					document.getElementById("validateButton").disabled = false;
+					document.getElementById("countdownOtp").innerText = "";
+				} else {
+					document.getElementById("countdownOtp").innerText = "Resend OTP in: " + countdown + "s";
+					countdown--;
+				}
+			}, 1000);
+		}
+
+		function toggleVerifyButton() {
+			var emailInput = document.getElementById("email");
+			var verifyButton = document.getElementById("verifyButton");
+
+			if (emailInput.value.trim() !== "") {
+				verifyButton.style.display = "block";
+			} else {
+				verifyButton.style.display = "none";
+			}
+		}
+
+		let timer;
+		let countdown = 60;
+
+		function startTimer() {
+			timer = setInterval(function () {
+				if (countdown <= 0) {
+					clearInterval(timer);
+					document.getElementById("resendButton").disabled = false;
+					document.getElementById("countdown").innerText = "";
+				} else {
+					document.getElementById("countdown").innerText = "Resend OTP in: " + countdown + "s";
+					countdown--;
+				}
+			}, 1000);
+		}
+
+		function enableValidateButton() {
+			document.getElementById("validateButton").disabled = false;
+		}
+
+		function enableResendButton() {
+			document.getElementById("resendButton").disabled = false;
+		}
+		function enableRegisterButton() {
+			let registerButton = document.getElementById("submitButton");
+			registerButton.disabled = false;
+			registerButton.style.backgroundColor = "green";
+		}
+
+
+		function generateOtp() {
+			let email = document.getElementById("email").value;
+
+			fetch("http://localhost:9006/wecare/generateEmailOtp", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: email,
+			})
+				.then(response => {
+					if (response.ok) {
+						document.getElementById("otpsentmessage").innerText = "Otp sent successfully";
+						document.getElementById("verifyButton").disabled = true;
+						showOtpPopup();
+						response.text();
+						enableValidateButton();
+						countdown = 60;
+						startTimer();
+						return response.text();
+						// Return the promise chain to the next then block
+					} else {
+						throw new Error("Failed to generate OTP");
+					}
+				})
+				.then(data => {
+					document.getElementById("message").innerHTML = data;
+				})
+				.catch(error => console.error("Error generating OTP:", error));
+		}
+
+		function validateOtp() {
+			let otp = document.getElementById("otp").value;
+			let email = document.getElementById("email").value;
+			const validateButton = document.getElementById("validateButton");
+			validateButton.style.color = "#4caf50";
+
+			fetch("http://localhost:9006/wecare/validateOtp", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: '{"email":"' + email + '","otp":"' + otp + '"}', // Directly pass the formatted string
+			})
+				.then(response => {
+					clearInterval(timer); // Stop the OTP timer
+					document.getElementById("countdown").innerText = "";
+
+					if (response.ok) {
+
+
+						document.getElementById("validateButton").disabled = true;
+						document.getElementById('validateButton').classList.add('green');
+						document.getElementById("otpmessage").innerText = "Otp verified succesfully";
+
+						enableRegisterButton();
+					} else {
+						document.getElementById("otpmessage").innerText = "Otp expired or invalid";
+						enableResendButton();
+					}
+
+					return response.text();
+				})
+				.then(data => {
+					// Display the response as it is
+					document.getElementById("message").innerText = data;
+
+					// If the response is successful, hide the OTP popup
+					if (document.getElementById("validateButton").disabled) {
+						hideOtpPopup();
+					}
+				})
+				.catch(error => {
+					console.error("Error validating OTP:", error.message);
+					// Handle the error here, e.g., show an error message to the user
+					document.getElementById("message").innerText = "Error: " + error.message;
+				});
+		}
+		function resendOtp() {
+			let email = document.getElementById("email").value;
+
+			fetch("http://localhost:9006/wecare/generateEmailOtp", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: email,
+			})
+				.then(response => {
+					if (response.ok) {
+						document.getElementById("resendButton").disabled = true;
+						enableValidateButton();
+						countdown = 60;
+						startTimer();
+						return response.text(); // Capture the response text
+					} else {
+						throw new Error("Error resending OTP");
+					}
+				})
+				.then(data => {
+					// Display the response text
+					document.getElementById("message").innerText = data;
+				})
+				.catch(error => {
+					console.error("Error resending OTP:", error);
+					// Handle the error or display an error message
+					document.getElementById("message").innerText = "Error resending OTP: " + error.message;
+				});
+		}
+
+
+		function validatePassword() {
+			let password = document.getElementById("password").value;
+			let confirmPassword = document.getElementById("confirmPassword").value;
+
+			if (password !== confirmPassword) {
+				document.getElementById("confirmPassword").value = "";
+				document.getElementById("passwordmessage").innerHTML = "Password and Confirm Password do not match !";
+
+				return false;
+			} else {
+				document.getElementById("passwordmessage").innerHTML = "";
+
+				return true;
+			}
+		}
+
+		window.onload = function () {
+			let confirmPasswordInput = document.getElementById("confirmPassword");
+			confirmPasswordInput.addEventListener("blur", function () {
+				validatePassword();
+			});
+		};
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			const popup = document.getElementById('popup');
+
+			if (popup.innerText.trim() !== '') {
+				popup.style.display = 'block';
+
+				setTimeout(function() {
+					popup.style.display = 'none';
+				}, 8000);
+			}
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			const popup1 = document.getElementById('popup1');
+
+			if (popup1.innerText.trim() !== '') {
+				popup1.style.display = 'block';
+
+				setTimeout(function() {
+					popup1.style.display = 'none';
+				}, 8000);
+			}
+		});
+	</script>
+</body>
+<div id="otpPopup" class="modal" style="display: none;">
+	<div class="modal-content">
+		<span class="close" onclick="hideOtpPopup()">&times;</span>
+		<p id="otpsentmessage"></p>
+		<h2>Enter OTP</h2>
+		<input type="text" id="otp" placeholder="Enter OTP">
+		<p id="otpmessage"></p>
+		<button id="validateButton" onclick="validateOtp()">Validate</button>
+
+		<p id="countdown"></p>
+		<button type="button" id="resendButton" onclick="resendOtp()" disabled>Resend OTP</button>
+	</div>
+</div>
+</html>

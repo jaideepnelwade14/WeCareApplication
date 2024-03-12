@@ -1,0 +1,260 @@
+@charset "ISO-8859-1";
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #333;
+	line-height: 1.6;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+	background: url('../css/abstract2.jpg') no-repeat center center/cover;
+}
+
+ul {
+	list-style: none !important;
+}
+
+a {
+	color: #333;
+	text-decoration: none !important;
+}
+
+p {
+	margin: 10px 0 !important;
+}
+
+img {
+	width: 100%;
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: white;
+	opacity: 0.9;
+	width: 100%;
+	height: 90px;
+	position: fixed;
+	top: 0px;
+	padding: 0 30px;
+	transition: 0.5s;
+	color: black;
+}
+
+.navbar a {
+	color: black;
+	padding: 0px 20px;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.navbar a:hover {
+	border-bottom: #4caf50 3px solid;
+	padding-bottom: 6px;
+}
+
+.navbar ul {
+	display: flex;
+}
+
+.navbar ul li {
+	margin: 5px !important;
+}
+
+.buttons {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.navbar .logo {
+	font-weight: 400;
+	font-size: 2em;
+}
+
+.homeheader {
+	height: 90px;
+	position: relative;
+	color: #fff;
+	opacity: 0.8;
+	z-index: 2;
+	margin-bottom: 49px;
+}
+
+.homeheader::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.icons {
+	padding: 30px;
+}
+
+.icons h3 {
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.icons i {
+	background-color: #28a745;
+	color: #fff;
+	padding: 1rem;
+	border-radius: 50%;
+	margin-bottom: 15px;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 245px;
+	height: 73px;
+}
+
+.footer a {
+	color: #fff;
+}
+
+.footer a:hover {
+	color: #28a745;
+}
+
+.footer p {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	margin-top: 48px;
+	height: 70px;
+}
+
+.user-icon-button {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	border: 2px solid black;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.user-icon {
+	position: relative;
+	display: inline-block;
+	margin-top: -8px;
+}
+
+.user-icon span {
+	font-size: 17px;
+	color: #4caf50;
+	font-weight: bold;
+	border-bottom: 2px solid black;
+	padding: 2px;
+}
+
+.user-icon #custom-logout {
+	color: right;
+	font-size: 16px;
+	margin-left: 5px;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: rgba(255, 255, 255, 1);
+	min-width: 190px;
+	z-index: 4;
+	right: 0%;
+	margin: auto;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 10px 12px;
+	font-size: 17.5px;
+	margin-right: 0px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: #ddd;
+}
+
+.user-icon:hover .dropdown-content {
+	display: block;
+}
+
+.custom-dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-dialog {
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+}
+
+.custom-dialog p {
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.custom-dialog button1 {
+	margin: auto;
+	margin-right: 10px;
+	padding: 10px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.custom-dialog button2 {
+	margin: auto;
+	margin-left: 10px;
+	padding: 10px 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	border: none;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.custom-dialog button1:hover {
+	color: white;
+	background-color: #4caf50;
+}
+
+.custom-dialog button2:hover {
+	color: white;
+	background-color: red;
+}

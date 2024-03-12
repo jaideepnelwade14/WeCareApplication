@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/viewingProfileStyle.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<title>Admin Profile</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i
+					class="fa-solid fa-handshake photo"></i> &nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a
+						th:href="@{/wecare/admin/track-complaints}">Track Complaints</a></li>
+					<li class="buttons"><a
+						th:href="@{/wecare/admin/jurisdictions}">Jurisdictions</a></li>
+					<li class="buttons"><a th:href="@{/wecare/admin/officers}">Officers</a></li>
+					<li>&nbsp;</li>
+					<li>
+						<div class="user-icon">
+							<span>[[${adminName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/admin/officers/add}">Add Officer</a> 
+								<a th:href="@{/wecare/admin/jurisdictions/add}">Add Jurisdiction</a> 
+								<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout
+									<i class="fa-solid fa-right-from-bracket"
+									style="color: #e40707; margin-left: 5px; font-size: 20px;"></i>
+								</a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	
+	<div class="tableCaption">
+		<p>VIEW PROFILE</p>
+	</div>
+	
+	<div id="popup" class="popup">
+		<p th:if="${successmessage}" th:text="${successmessage}"></p>
+	</div>
+	
+	<div class="container">
+		<div class="personal-details-body">
+			<div class="profile-photo">
+				<i class="fa-solid fa-user-tie"></i>
+			</div>
+			<div class="Personal-details">
+				<div class="personal-details-row-1">
+					<div>
+						<h3>Name</h3>
+						<p th:text="${adminDetails.adminName}"></p>
+					</div>
+					<div>
+						<h3>Email</h3>
+						<p th:text="${adminDetails.email}"></p>
+					</div>
+					<div>
+						<h3>Registered Date</h3>
+						<p th:text="${#temporals.format(adminDetails.registeredDate,'yyyy-MM-dd')}"></p>
+					</div>
+				</div>
+				<div class="Personal-details">
+					<div class="personal-details-row-1">
+						<div>
+							<h3>Jurisdictions Count</h3>
+							<p th:text="${juryCount}" class="count"></p>
+						</div>
+						<div>
+							<h3>Officers Count</h3>
+							<p th:text="${officersCount}" class="count"></p>
+						</div>
+						<div>
+							<h3>Complaints Raised</h3>
+							<p th:text="${complaintsCount}" class="count"></p>
+						</div>
+					</div>
+					<div class="Personal-details">
+						<div class="personal-details-row-1">
+							<div>
+								<h3>Registered Users</h3>
+								<p th:text="${usersCount}" class="count"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="buttons">
+		<a th:href="@{/wecare/admin/change-password}">
+			<button type="button"class="pages"><i class="fa-solid fa-key"></i>&nbsp;Change Password</button>
+		</a>
+	</div>
+	<div class="buttons" style="margin-right: 550px !important;">
+		<a th:href="@{/wecare/admin/add-admin}">
+			<button type="button"class="pages"><i class="fa-solid fa-user-plus"></i>&nbsp;Add Admin</button>
+		</a>
+	</div>
+</body>
+</html>

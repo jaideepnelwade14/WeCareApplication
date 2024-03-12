@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/navbarUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/tableUtility.css}">
+	<link rel="stylesheet" th:href="@{/css/adminOfficer.css}">
+	<script th:src="@{/js/script.js}"></script>
+	<script th:src="@{/js/search.js}"></script>
+	<link rel="icon" type="image/x-icon" th:href="@{/css/favicon.png}">
+	<script src="https://kit.fontawesome.com/7d53697cb5.js" crossorigin="anonymous"></script>
+	<title>Officers</title>
+</head>
+
+<body>
+	<header class="homeheader">
+		<div id="navbar" class="navbar top">
+			<h1 class="logo">
+				<span class="text-primary"><i class="fa-solid fa-handshake"></i>
+					&nbsp;</span>WeCare
+			</h1>
+			<nav>
+				<ul>
+					<li class="buttons"><a th:href="@{/wecare/admin/track-complaints}">Track Complaints</a></li>
+					<li class="buttons"><a th:href="@{/wecare/admin/jurisdictions}">Jurisdictions</a></li>
+					<li>&nbsp;</li>
+					<li>
+						<div class="user-icon">
+							<span>[[${adminName}]]</span> &nbsp;
+							<button class="user-icon-button">
+								<i class="fa-solid fa-user-tie"></i>
+							</button>
+							<div class="dropdown-content">
+								<a th:href="@{/wecare/admin/jurisdictions/add}">Add Jurisdiction</a>
+								<a th:href="@{/wecare/admin/view-profile}">View Profile</a>
+								<a th:href="@{/wecare/admin/change-password}">Change Password</a>
+								<a th:href="@{/logout}" onclick="confirmLogout(event)">Logout
+									<i class="fa-solid fa-right-from-bracket"
+										style="color: #e40707; margin-left: 5px; font-size: 20px;"></i></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+
+	<div id="popup" class="popup">
+		<p th:if="${successMessage}" th:text="${successMessage}"></p>
+	</div>
+
+	<div id="popup1" class="popup1">
+		<p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+	</div>
+
+	<div class="search-bar">
+		<input type="text" id="searchInput" placeholder="Search" oninput="filterTableOfficer()" />
+		<label><i class="fa-solid fa-magnifying-glass"></i></label>
+	</div>
+
+	<div class="tableCaption">
+		<p>OFFICERS</p>
+		<a th:href="@{/wecare/admin/officers/add}"><button type="button" class="pages">Add Officer</button></a>
+	</div>
+
+	<table>
+		<caption></caption>
+		<tr>
+			<th>SL No.</th>
+			<th>Name</th>
+			<th>Address</th>
+			<th>Email Address</th>
+			<th>Phone</th>
+			<th>Area</th>
+			<th>Ward</th>
+			<th>Layout</th>
+			<th>Actions</th>
+		</tr>
+		<th:block th:if="${not #lists.isEmpty(officers)}">
+			<tr th:each="officer , iterStat: ${officers}">
+				<td th:text="${iterStat.count}"></td>
+				<td th:text="${officer.officerName}"></td>
+				<td th:text="${officer.address}"></td>
+				<td th:text="${officer.email}"></td>
+				<td th:text="${officer.phone}"></td>
+				<td th:text="${officer.area != null ? officer.area : 'N/A'}"></td>
+				<td th:text="${officer.ward != null ? officer.ward : 'N/A'}"></td>
+				<td th:text="${officer.layout != null ? officer.layout : 'N/A'}"></td>
+				<td><a th:href="@{/wecare/admin/officers/edit-officer(id=${officer.officerId})}"
+						onclick="return confirmEditOfficer(event)" th:data-officer-id="${officer.officerId}">
+						<i class="fa-regular fa-pen-to-square fa-lg"></i>
+					</a>
+					<a th:href="@{/wecare/admin/officers/delete-officer(id=${officer.officerId})}"
+						onclick="return confirmDeleteOfficer(event)" th:data-officer-id="${officer.officerId}">
+						<i class="fa-solid fa-trash fa-lg" style="color: #f10404;"></i>
+					</a>
+				</td>
+			</tr>
+			<th:block>
+	</table>
+	<th:block th:if="${#lists.isEmpty(officers)}">
+		<p th:text="${noOfficersMessage}" class="complaintMessage"></p>
+	</th:block>
+	<br/>
+	<br/>
+	
+</body>
+</html>
